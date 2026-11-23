@@ -1,0 +1,12 @@
+{
+  "name": "opus",
+  "private": true,
+  "scripts": {
+    "dev": "npx concurrently -n api,web -c cyan,magenta \"npm run dev --prefix server\" \"npm run dev --prefix web\"",
+    "dev:api": "npm run dev --prefix server",
+    "dev:web": "npm run dev --prefix web"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

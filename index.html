@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OPUS — Order Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --dark:#0d2f36;
+  --dark2:#0a272d;
+  --teal:#0d9a92;
+  --teal-dark:#0b807a;
+  --bg:#f6f7f9;
+  --pill:#e7e8eb;
+  --text:#122f35;
+  --muted:#7b8288;
+  --card-border:#eceef0;
+  --beige:#fef4e8;
+  --greyimg:#eef0f2;
+  --orange:#ef8b2e;
+}
+body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+/* HEADER */
+header{background:#fff;border-bottom:1px solid #eceef0;position:sticky;top:0;z-index:20}
+.nav{max-width:1280px;margin:0 auto;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.5px;font-size:22px}
+.logo-mark{width:38px;height:38px;border-radius:50%;background:conic-gradient(from 20deg,#0d9a92,#0a4a52,#3cb043,#0d2f36,#0d9a92);position:relative;overflow:hidden;flex-shrink:0;border:2px solid #0d2f36}
+.logo-mark:after{content:'';position:absolute;inset:4px;border-radius:50%;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-right-color:transparent;transform:rotate(-20deg)}
+.logo span{color:var(--dark);font-weight:800;letter-spacing:-.5px}
+.logo span b{font-weight:800}
+.search{flex:1;max-width:520px;margin:0 auto;position:relative}
+.search input{width:100%;height:40px;border:0;background:#f1f2f4;border-radius:999px;padding:0 18px 0 42px;font-size:14px;outline:none;color:#333}
+.search input::placeholder{color:#9aa0a6}
+.search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:#9aa0a6}
+.nav-links{display:flex;align-items:center;gap:22px;font-size:14px;font-weight:500}
+.nav-links a{color:#1d3338}
+.admin{display:flex;align-items:center;gap:6px}
+.cart{position:relative;width:28px;height:28px;display:flex;align-items:center;justify-content:center}
+.cart-badge{position:absolute;top:-6px;right:-6px;background:var(--orange);color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+/* HERO */
+.hero{background:radial-gradient(1000px 400px at 20% 0%, #143e46 0%, var(--dark) 55%, #081e22 100%);color:#fff;padding:74px 28px 84px}
+.hero-inner{max-width:1215px;margin:0 auto}
+.hero h1{font-size:52px;line-height:1;font-weight:800;letter-spacing:-1px;margin-bottom:18px}
+.hero p{max-width:610px;color:#c8d2d3;font-size:17px;line-height:1.6}
+/* FILTER */
+.container{max-width:1240px;margin:0 auto;padding:32px 24px 0}
+.filters{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.pill{border:0;background:var(--pill);color:#1e3439;padding:11px 22px;border-radius:999px;font-size:14px;font-weight:500;cursor:pointer;transition:.18s;white-space:nowrap}
+.pill:hover{transform:translateY(-1px)}
+.pill.active{background:var(--teal);color:#fff;box-shadow:0 4px 12px rgba(13,154,146,.35)}
+.clear{margin-left:auto;font-size:14px;color:#6b7378;text-decoration:underline;text-underline-offset:3px;cursor:pointer;background:none;border:0}
+.clear:hover{color:var(--dark)}
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:26px}
+.card{background:#fff;border:1px solid var(--card-border);border-radius:18px;padding:16px 16px 18px;transition:.2s;cursor:pointer}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(13,47,54,.1)}
+.imgwrap{height:190px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative}
+.imgwrap.beige{background:var(--beige)}
+.imgwrap.grey{background:var(--greyimg)}
+.mock{width:62%;height:82%;background:linear-gradient(180deg,#bfe6e8,#a8d9dc);position:relative;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+.mock.dark{background:linear-gradient(180deg,#2d6b74,#0f3a42)}
+.mock.tealbg{background:linear-gradient(180deg,#1a7f7e,#0e4f4e)}
+.cat{margin:16px 0 6px;font-size:11px;font-weight:700;letter-spacing:.8px;color:var(--teal);text-transform:uppercase}
+.card h3{font-size:17px;font-weight:700;margin-bottom:8px;color:#0f2b31}
+.card p{font-size:13.5px;line-height:1.5;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:40px}
+.price{margin-top:12px;font-size:17px;font-weight:800;color:#0a252b}
+/* shapes to mimic screenshot */
+.poster-hang{width:52%;height:78%;background:#165a5e;border:2px solid #dfe7e7;border-left-width:3px;border-right-width:3px;position:relative}
+.poster-hang:before,.poster-hang:after{content:'';position:absolute;top:-22px;width:1px;height:22px;background:#234}
+.diamond{width:110px;height:110px;background:#0f6f70;transform:rotate(45deg);border:3px solid #9ad0d3;box-shadow:0 8px 18px rgba(0,0,0,.25)}
+.flagpole{width:3px;height:130px;background:#222;position:relative}
+.flag{position:absolute;left:3px;top:10px;width:88px;height:52px;background:linear-gradient(180deg,#4a7d86,#2f5560);clip-path:polygon(0 0,100% 12%,92% 50%,100% 88%,0 100%)}
+.book{width:110px;height:140px;background:#0f3d44;position:relative;transform:perspective(400px) rotateY(-10deg)}
+.book:after{content:'';position:absolute;left:10px;top:40px;right:-22px;bottom:20px;background:#fff;transform:skewX(-18deg)}
+.tablecard{width:84px;height:110px;background:linear-gradient(180deg,#7fb5b6,#3f8a8d);transform:perspective(400px) rotateY(12deg);display:flex;align-items:center;justify-content:center;color:#0b3338;font-weight:800;font-size:13px;line-height:1.1;text-align:center;padding:6px}
+.script{font-family:Georgia,serif;font-style:italic;color:#0d5c62;font-weight:700}
+/* SHOW MORE */
+.more-wrap{display:flex;justify-content:center;padding:44px 0 56px}
+.more{border:1.2px solid var(--teal);color:var(--teal-dark);background:transparent;padding:13px 30px;border-radius:999px;font-size:15px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:8px}
+.more:hover{background:var(--teal);color:#fff}
+/* FOOTER */
+footer{background:var(--dark2);border-top:4px solid var(--teal);color:#cbd5d6;padding:52px 28px 90px}
+.foot-inner{max-width:1215px;margin:0 auto}
+.foot-logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:800;color:#fff;margin-bottom:52px}
+.foot-logo .logo-mark{border-color:#fff}
+.foot-inner p{font-size:14px;line-height:1.6;color:#9fb0b2}
+.foot-inner a{color:var(--teal)}
+.hidden{display:none!important}
+@media(max-width:1020px){.grid{grid-template-columns:repeat(2,1fr)}.search{display:none}.hero h1{font-size:38px}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.nav{padding:0 16px}.hero{padding:46px 18px}.container{padding:20px 16px 0}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="index.html"><img src="opus-logo.png" alt="OPUS" style="height:38px;display:block"></a>
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="6"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="searchInput" type="text" placeholder="Search..." />
+    </div>
+    <nav class="nav-links">
+      <a href="#">Portal</a>
+      <a href="#">Support</a>
+      <a href="admin.html" class="admin"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Admin</a>
+      <a href="cart.html" class="cart" id="cartBtn">🛒<span class="cart-badge" id="cartCount">1</span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Order Portal</h1>
+    <p>Designify 3 ordering portal for printed materials, below you will find all items in the range. Categorize the range with the buttons below.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="filters" id="filters">
+    <button class="pill" data-cat="decals">Decals</button>
+    <button class="pill" data-cat="profile">Profile Products</button>
+    <button class="pill" data-cat="posters">Posters</button>
+    <button class="pill" data-cat="signs">Signs</button>
+    <button class="pill active" data-cat="print">Print Products</button>
+    <button class="pill active" data-cat="brochures">Brochures / Flyers</button>
+    <button class="pill active" data-cat="flags">Flags</button>
+    <button class="pill" data-cat="other">Other</button>
+    <button class="clear" id="clearBtn">Clear Selection</button>
+  </div>
+
+  <div class="grid" id="grid">
+    <div class="card" data-cat="decals" data-name="Decale name">
+      <div class="imgwrap beige"><div class="mock"><span class="script">Caneratigine<br><small style="font-family:Inter;font-style:normal;font-size:10px;letter-spacing:1px">MOCKUP</small></span></div></div>
+      <div class="cat">Decals</div><h3>Decale name</h3><p>Lorem ipsum dolor for printed materials, below you w..</p><div class="price">12,00 kr</div>
+    </div>
+    <div class="card" data-cat="profile" data-name="Profile Product">
+      <div class="imgwrap beige"><div class="book"></div></div>
+      <div class="cat">Profile Products</div><h3>Profile Product</h3><p>Lorem ipsum dolor for printed materials, below you w..</p><div class="price">12,00 kr</div>
+    </div>
+    <div class="card" data-cat="posters" data-name="Poster Signs">
+      <div class="imgwrap grey"><div class="poster-hang"></div></div>
+      <div class="cat">Posters</div><h3>Poster Signs</h3><p>Lorem ipsum dolor for printed materials, below you w..</p><div class="price">12,00 kr</div>
+    </div>
+    <div class="card" data-cat="print" data-name="Print Products">
+      <div class="imgwrap grey" style="background:linear-gradient(180deg,#e8d9c3,#d9c7a8)"><div class="diamond"></div></div>
+      <div class="cat">Print Products</div><h3>Print Products</h3><p>Lorem ipsum dolor for printed materials, below you w..</p><div class="price">12,00 kr</div>
+    </div>
+    <div class="card" data-cat="decals" data-name="Prine Product">
+      <div class="imgwrap grey"><div class="mock tealbg" style="width:55%"></div></div>
+      <div class="cat">Decals</div><h3>Prine Product</h3><p>Lorem ipsum dolor for printed materials, below you re.</p><div class="price">12,00 kr</div>
+    </div>
+    <div class="card" data-cat="brochures" data-name="Brochures / Flyers">
+      <div class="imgwrap grey"><div class="mock dark" style="width:70%;height:70%;transform:perspective(500px) rotateY(-18deg) rotateX(8deg)"></div></div>
+      <div class="cat">Print Products</div><h3>Brochures / Flyers</h3><p>Lorem ipsum dolor for printed materials, below you re.</p><div class="price">12,00 kr</div>
+    </div>
+    <div class="card" data-cat="print" data-name="Flager Signs">
+      <div class="imgwrap beige"><div class="tablecard">TABLE CARD</div></div>
+      <div class="cat">Print Products</div><h3>Flager Signs</h3><p>Lorem ipsum dolor for printed materials, below you re.</p><div class="price">12,00 kr</div>
+    </div>
+    <div class="card" data-cat="flags" data-name="Print Products flag">
+      <div class="imgwrap grey"><div class="flagpole"><div class="flag"></div></div></div>
+      <div class="cat">Print Products</div><h3>Print Products</h3><p>Lorem ipsum dolor for printed materials, below you re.</p><div class="price">12,00 kr</div>
+    </div>
+    <!-- extra hidden for Show More -->
+    <div class="card hidden extra" data-cat="signs" data-name="Sign Deluxe"><div class="imgwrap beige"><div class="poster-hang"></div></div><div class="cat">Signs</div><h3>Sign Deluxe</h3><p>Lorem ipsum dolor for printed materials, below you re.</p><div class="price">12,00 kr</div></div>
+    <div class="card hidden extra" data-cat="other" data-name="Other item"><div class="imgwrap grey"><div class="mock"></div></div><div class="cat">Other</div><h3>Other item</h3><p>Lorem ipsum dolor for printed materials, below you re.</p><div class="price">12,00 kr</div></div>
+    <div class="card hidden extra" data-cat="flags" data-name="Beach Flag"><div class="imgwrap grey"><div class="flagpole"><div class="flag"></div></div></div><div class="cat">Flags</div><h3>Beach Flag</h3><p>Lorem ipsum dolor for printed materials, below you re.</p><div class="price">12,00 kr</div></div>
+    <div class="card hidden extra" data-cat="brochures" data-name="Flyer Premium"><div class="imgwrap beige"><div class="tablecard">TABLE CARD</div></div><div class="cat">Brochures / Flyers</div><h3>Flyer Premium</h3><p>Lorem ipsum dolor for printed materials, below you re.</p><div class="price">12,00 kr</div></div>
+  </div>
+
+  <div class="more-wrap"><button class="more" id="moreBtn">Show More Products <span>﹀</span></button></div>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo"><img src="opus-wh 1.png" alt="OPUS" style="height:50px;display:block"></div>
+    <p>Portal for ordering printed materials created by<br><a href="#">Tryckeriett</a></p>
+  </div>
+</footer>
+
+<script>
+const pills=[...document.querySelectorAll('.pill')];
+const cards=[...document.querySelectorAll('.card')];
+const clearBtn=document.getElementById('clearBtn');
+pills.forEach(p=>p.addEventListener('click',()=>{p.classList.toggle('active');filter();}));
+clearBtn.addEventListener('click',()=>{pills.forEach(p=>p.classList.remove('active'));filter();});
+function filter(){
+  const active=pills.filter(p=>p.classList.contains('active')).map(p=>p.dataset.cat);
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  cards.forEach(c=>{
+    const matchCat = active.length===0 || active.includes(c.dataset.cat) || (active.includes('print') && c.querySelector('.cat').textContent.toLowerCase().includes('print'));
+    const matchQ = !q || c.dataset.name.toLowerCase().includes(q);
+    // keep hidden extra logic
+    const isExtraHidden = c.classList.contains('extra') && !expanded;
+    c.style.display = (matchCat && matchQ && !isExtraHidden) ? '' : (matchCat && matchQ && c.classList.contains('extra') && expanded ? '' : 'none');
+    if(c.classList.contains('extra') && !expanded) c.style.display='none';
+  });
+}
+document.getElementById('searchInput').addEventListener('input',filter);
+let expanded=false;
+document.getElementById('moreBtn').addEventListener('click',e=>{
+  expanded=!expanded;
+  document.querySelectorAll('.extra').forEach(el=>el.classList.toggle('hidden',!expanded));
+  e.currentTarget.firstChild.textContent = expanded ? 'Show Less Products ' : 'Show More Products ';
+  filter();
+});
+// cart persist
+let count=parseInt(localStorage.getItem('opus_cart')||'1');
+document.getElementById('cartCount').textContent=count;
+// CLICK -> go to single product page (product.html)
+document.querySelectorAll('.card').forEach(c=>c.addEventListener('click',()=>{
+  const name=encodeURIComponent(c.dataset.name || c.querySelector('h3').textContent);
+  const cat=encodeURIComponent(c.dataset.cat || '');
+  const price=encodeURIComponent(c.querySelector('.price').textContent.trim());
+  location.href=`product.html?name=${name}&cat=${cat}&price=${price}`;
+}));
+filter();
+</script>
+</body>
+</html>

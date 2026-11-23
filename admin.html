@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div class="app">
+  <aside class="side" id="side">
+    <a class="brand" href="#companies">
+      <div class="wordmark">tryckeriett</div>
+      <div class="tag">ALLT MED TRYCK</div>
+    </a>
+    <nav class="sidenav" id="sidenav"></nav>
+    <a class="logout" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 7V5H5v14h9v-2"/><path d="M10 12h9"/><path d="M16 9l3 3-3 3"/></svg>
+      Log Out
+    </a>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+  <div class="maincol">
+    <header class="top">
+      <button class="burger" id="burger" type="button" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <nav class="topnav" id="topnav"></nav>
+      <div class="top-right">
+        <div class="popwrap">
+          <button class="iconbtn" id="gearBtn" type="button" aria-label="Settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 3.5v2.2M12 18.3V20.5M3.5 12h2.2M18.3 12h2.2"/></svg>
+          </button>
+          <div class="pop" id="gearPop" hidden>
+            <a href="#settings">Settings</a>
+            <a href="#info">Admin info</a>
+            <a href="index.html">Back to ordering portal</a>
+          </div>
+        </div>
+        <div class="popwrap">
+          <button class="iconbtn bell" id="bellBtn" type="button" aria-label="Notifications">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15L6 16z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>
+            <i class="dot"></i>
+          </button>
+          <div class="pop" id="bellPop" hidden>No new notifications.</div>
+        </div>
+        <div class="who">
+          <div class="avatar" aria-hidden="true">
+            <svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="18" fill="#d5ebe7"/><circle cx="18" cy="14" r="6" fill="#e7b89a"/><path d="M6 32c1.6-7 6-10 12-10s10.4 3 12 10" fill="#0f766e"/></svg>
+          </div>
+          <div><b>Admin User</b><span>Super Admin</span></div>
+        </div>
+      </div>
+    </header>
+    <main class="view" id="view"></main>
+  </div>
+</div>
+<script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title id="pageTitle">A3 sheets decals — OPUS</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--dark:#0d2f36;--dark2:#0a272d;--teal:#0d9a92;--bg:#f6f7f9;--muted:#7b8288;--orange:#ef7d1a;--orange-dark:#e06f0a;--beige:#fef6ea;--border:#d8dbde}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#122f35}
+a{text-decoration:none;color:inherit}
+header{background:#fff;border-bottom:1px solid #eceef0;position:sticky;top:0;z-index:20}
+.nav{max-width:1280px;margin:0 auto;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px}
+.logo-mark{width:38px;height:38px;border-radius:50%;background:conic-gradient(from 20deg,#0d9a92,#0a4a52,#3cb043,#0d2f36,#0d9a92);border:2px solid #0d2f36;position:relative}
+.search{flex:1;max-width:520px;margin:0 auto;position:relative}
+.search input{width:100%;height:40px;border:0;background:#f1f2f4;border-radius:999px;padding:0 18px 0 42px;font-size:14px;outline:none}
+.search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:#9aa0a6}
+.nav-links{display:flex;align-items:center;gap:22px;font-size:14px;font-weight:500}
+.cart{position:relative}
+.cart-badge{position:absolute;top:-8px;right:-10px;background:var(--orange);color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.main{max-width:1240px;margin:0 auto;padding:56px 24px 90px;display:grid;grid-template-columns:1.05fr .85fr;gap:60px;align-items:start}
+.imgbox{background:var(--beige);border:1px solid #1a2e33;border-radius:12px;height:460px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.imgbox .big{width:52%;height:84%;background:linear-gradient(180deg,#c6e9eb,#b3dfe2);display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:0 10px 30px rgba(0,0,0,.12)}
+.script{font-family:Georgia,serif;font-style:italic;color:#0e5f65;font-size:34px;font-weight:700;text-shadow:2px 2px 0 rgba(0,0,0,.25);line-height:1}
+.mocksub{font-family:Inter;font-size:18px;letter-spacing:1px;color:#fff;text-shadow:1px 1px 3px #333;margin-top:2px}
+.details{padding-top:18px}
+.details h1{font-size:38px;font-weight:800;letter-spacing:-.5px;margin-bottom:12px;color:#0a252b}
+.desc{color:#7a8388;font-size:14.5px;margin-bottom:22px}
+.meta{display:flex;gap:80px;color:#7a8388;font-size:14px;margin-bottom:16px}
+.price{font-size:36px;font-weight:800;color:#0a252b;margin-bottom:28px}
+.qty{display:flex;align-items:center;justify-content:space-between;border:1px solid #e2e4e6;background:#fff;border-radius:10px;height:48px;width:230px;padding:4px 4px 4px 6px;margin-bottom:20px}
+.qty button{width:36px;height:36px;border:0;border-radius:7px;background:transparent;font-size:22px;cursor:pointer;color:#6b7378;display:flex;align-items:center;justify-content:center}
+.qty button.plus{background:var(--orange);color:#fff;font-size:22px;font-weight:600}
+.qty button.plus:hover{background:var(--orange-dark)}
+.qty span{font-size:15px;font-weight:500}
+.addbtn{width:230px;height:40px;border:0;border-radius:999px;background:var(--orange);color:#fff;font-weight:700;font-size:15px;cursor:pointer}
+.addbtn:hover{background:var(--orange-dark)}
+.back{display:inline-flex;margin-bottom:10px;font-size:13px;color:#6b7378;text-decoration:underline;cursor:pointer;background:none;border:0}
+footer{background:var(--dark2);border-top:4px solid var(--teal);padding:52px 28px 140px;color:#9fb0b2}
+.foot-inner{max-width:1215px;margin:0 auto}
+.foot-logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:800;color:#fff;margin-bottom:52px}
+.foot-logo .logo-mark{border-color:#fff}
+.foot-inner p{font-size:14px;line-height:1.6}
+.foot-inner a{color:var(--teal)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#0d2f36;color:#fff;padding:12px 22px;border-radius:999px;font-size:14px;opacity:0;transition:.25s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:900px){.main{grid-template-columns:1fr;gap:30px}.search{display:none}.details h1{font-size:30px}.imgbox{height:340px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="logo" href="index.html"><img src="opus-logo.png" alt="OPUS" style="height:38px;display:block"></a>
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="6"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" placeholder="Search..." onclick="location.href='index.html'" />
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Portal</a>
+      <a href="#">Support</a>
+      <a href="admin.html">👤 Admin</a>
+      <a href="cart.html" class="cart">🛒<span class="cart-badge" id="cartCount">1</span></a>
+    </nav>
+  </div>
+</header>
+
+<div class="main">
+  <div>
+    <button class="back" onclick="history.back()">← Back to portal</button>
+    <div class="imgbox"><div class="big"><div class="script" id="mockTitle">Ceneratigine</div><div class="mocksub">MOCKUP</div></div></div>
+  </div>
+  <div class="details">
+    <h1 id="pName">A3 sheets decals</h1>
+    <div class="desc" id="pDesc">A3 sheets with decals, each decal is 210×150 mm.</div>
+    <div class="meta"><span>1 piece</span><span>SKU: <span id="pSku">OP195</span></span></div>
+    <div class="price" id="pPrice">12,00 kr</div>
+    <div class="qty">
+      <button id="minus">−</button><span id="qVal">1</span><button class="plus" id="plus">+</button>
+    </div>
+    <button class="addbtn" id="addBtn">Add to cart</button>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo"><img src="opus-wh 1.png" alt="OPUS" style="height:50px;display:block"></div>
+    <p>Portal for ordering printed materials created by<br><a href="#">Tryckeriett</a></p>
+  </div>
+</footer>
+<div class="toast" id="toast">Added to cart ✓</div>
+<script>
+const params=new URLSearchParams(location.search);
+const name=params.get('name'), cat=params.get('cat'), price=params.get('price');
+if(name){document.getElementById('pName').textContent=decodeURIComponent(name);document.getElementById('pageTitle').textContent=decodeURIComponent(name)+' — OPUS';document.getElementById('mockTitle').textContent=decodeURIComponent(name).split(' ').slice(0,1).join(' ');}
+if(price)document.getElementById('pPrice').textContent=decodeURIComponent(price);
+if(cat)document.getElementById('pSku').textContent='OP'+(decodeURIComponent(cat).length*37+95);
+let q=1;let cart=parseInt(localStorage.getItem('opus_cart')||'1');
+const qVal=document.getElementById('qVal'), cartCount=document.getElementById('cartCount');
+cartCount.textContent=cart;
+document.getElementById('plus').onclick=()=>{q++;qVal.textContent=q;};
+document.getElementById('minus').onclick=()=>{if(q>1)q--;qVal.textContent=q;};
+document.getElementById('addBtn').onclick=()=>{
+ cart+=q;localStorage.setItem('opus_cart',cart);cartCount.textContent=cart;
+ const t=document.getElementById('toast');t.textContent=`Added ${q} × ${document.getElementById('pName').textContent} to cart ✓`;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);
+};
+</script>
+</body>
+</html>

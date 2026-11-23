@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Checkout — OPUS</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--dark:#0d2f36;--dark2:#0a272d;--teal:#0d9a92;--teal-dark:#0a7f79;--bg:#f6f7f9;--muted:#7b8288;--orange:#ef7d1a;--border:#e9ebed}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#122f35}
+a{text-decoration:none;color:inherit}
+header{background:#fff;border-bottom:1px solid #eceef0;position:sticky;top:0;z-index:20}
+.nav{max-width:1280px;margin:0 auto;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:20px}
+.search{flex:1;max-width:520px;margin:0 auto;position:relative}
+.search input{width:100%;height:40px;border:0;background:#f1f2f4;border-radius:999px;padding:0 18px 0 42px;font-size:14px;outline:none}
+.search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:#9aa0a6}
+.nav-links{display:flex;align-items:center;gap:22px;font-size:14px;font-weight:500}
+.cart{position:relative}
+.cart-badge{position:absolute;top:-8px;right:-10px;background:var(--orange);color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.hero{background:var(--dark);color:#fff;padding:38px 28px 42px}
+.hero-inner{max-width:1240px;margin:0 auto}
+.hero h1{font-size:32px;font-weight:800;margin-bottom:8px}
+.hero p{color:#c8d2d3;font-size:14.5px}
+.layout{max-width:1240px;margin:0 auto;padding:28px 24px 20px;display:grid;grid-template-columns:1fr 330px;gap:24px;align-items:start}
+.card{background:#fff;border:1px solid #eceef0;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+.card h3{font-size:16px;font-weight:700;margin-bottom:20px}
+label{font-size:13px;font-weight:500;display:block;margin:14px 0 8px}
+label em{color:var(--orange);font-style:normal}
+input,textarea{width:100%;border:1px solid #e2e4e6;border-radius:8px;padding:12px 14px;font-size:13.5px;font-family:inherit;outline:none;background:#fff}
+input::placeholder,textarea::placeholder{color:#a8b0b4}
+input:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,154,146,.12)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+textarea{min-height:110px;resize:vertical}
+.bill-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.bill-head h3{margin:0}
+.switch-wrap{display:flex;align-items:center;gap:10px;font-size:13px;color:#4a5458}
+.switch{position:relative;width:44px;height:24px;background:#9aa0a6;border-radius:999px;cursor:pointer;transition:.2s;flex-shrink:0}
+.switch:after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}
+.switch.on{background:var(--teal)}
+.switch.on:after{left:22px}
+.summary{background:#fff;border:1px solid #eceef0;border-radius:12px;padding:20px}
+.summary h3{font-size:15px;margin-bottom:14px}
+.sitem{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:1px solid #f0f1f2}
+.sicon{width:42px;height:42px;border-radius:6px;background:linear-gradient(180deg,#d8eced,#b9d5d6);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sitem b{font-size:12.5px;display:block}
+.sitem small{font-size:11px;color:#9aa3a7}
+.srow{display:flex;justify-content:space-between;font-size:13.5px;padding:9px 0;color:#6b7378;border-top:1px solid #f0f1f2}
+.srow b{color:#0a252b}
+.stotal{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #e9ebed;margin-top:8px;padding-top:14px}
+.stotal strong{font-size:24px;font-weight:800}
+.incl{text-align:right;font-size:10px;color:#9aa3a7}
+.trust{background:#fff;border:1px solid #eceef0;border-radius:12px;padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+.titem{display:flex;gap:10px;align-items:center}
+.ticon{width:36px;height:36px;border-radius:50%;background:#e8f5f4;color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.titem b{font-size:11px;display:block}
+.titem small{font-size:10px;color:#9aa3a7}
+.bottom{max-width:1240px;margin:0 auto;padding:10px 24px 60px;display:flex;justify-content:space-between;align-items:center}
+.back{background:none;border:0;color:#6b7378;font-size:14px;cursor:pointer}
+.back:hover{color:var(--dark)}
+.complete{height:50px;padding:0 54px;border:0;border-radius:8px;background:var(--teal);color:#fff;font-weight:600;font-size:15px;cursor:pointer}
+.complete:hover{background:var(--teal-dark)}
+footer{background:var(--dark2);border-top:4px solid var(--teal);padding:52px 28px 140px;color:#9fb0b2}
+.foot-inner{max-width:1215px;margin:0 auto}
+.foot-inner a{color:var(--teal)}
+.err{border-color:#e00!important;background:#fff5f5}
+.popup-overlay{position:fixed;inset:0;background:rgba(10,39,45,.55);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;z-index:100;opacity:0;pointer-events:none;transition:.25s}
+.popup-overlay.show{opacity:1;pointer-events:auto}
+.popup{background:#fff;border-radius:16px;padding:32px 28px 26px;width:360px;max-width:90vw;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.25);transform:translateY(16px) scale(.97);transition:.25s}
+.popup-overlay.show .popup{transform:translateY(0) scale(1)}
+.popup-icon{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 14px}
+.popup-icon.error{background:#fdecec;color:#e11d48}
+.popup-icon.success{background:#e6f5f4;color:#0d9a92}
+.popup h4{font-size:18px;font-weight:800;margin-bottom:8px;color:#0a252b}
+.popup p{font-size:13.5px;color:#6b7378;line-height:1.5;margin-bottom:20px}
+.popup button{width:100%;height:44px;border:0;border-radius:10px;background:#0d2f36;color:#fff;font-weight:600;font-size:14px;cursor:pointer}
+.popup button:hover{background:#0d9a92}
+.popup .bar{height:4px;border-radius:999px;background:#eef2f2;margin-top:16px;overflow:hidden}
+.popup .bar i{display:block;height:100%;width:0;background:#0d9a92;transition:width 1.6s linear}
+@media(max-width:950px){.layout{grid-template-columns:1fr}.row2{grid-template-columns:1fr}.search{display:none}.bottom{flex-direction:column-reverse;gap:16px}}
+</style>
+</head>
+<body>
+<header>
+<div class="nav">
+<a href="index.html"><img src="opus-logo.png" alt="OPUS" style="height:38px;display:block"></a>
+<div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="6"/><path d="M21 21l-4.3-4.3"/></svg><input placeholder="Search..." onclick="location.href='index.html'"></div>
+<nav class="nav-links"><a href="index.html">Portal</a><a href="#">Support</a><a href="admin.html">👤 Admin</a><a href="cart.html" class="cart">🛒<span class="cart-badge" id="cartCount">1</span></a></nav>
+</div>
+</header>
+
+<section class="hero"><div class="hero-inner"><h1>Checkout</h1><p>Enter your details below to complete your order.</p></div></section>
+
+<div class="layout">
+<div>
+<form id="checkoutForm" novalidate>
+<div class="card"><h3>Contact Information</h3>
+<label>Email <em>*</em></label><input id="email" type="email" placeholder="email@example.com" required>
+<div class="row2"><div><label>Name <em>*</em></label><input id="fullname" placeholder="Full name" required></div><div><label>Phone Number <em>*</em></label><input placeholder="+46 00 000 00 00" required></div></div>
+</div>
+<div class="card"><h3>Shipping Address</h3>
+<label>Address <em>*</em></label><input placeholder="Street name and number" required>
+<div class="row2"><div><label>Postcode <em>*</em></label><input placeholder="000 00" required></div><div><label>City / Location <em>*</em></label><input placeholder="City" required></div></div>
+</div>
+<div class="card"><div class="bill-head"><h3>Billing Address</h3><div class="switch-wrap"><div class="switch" id="sameSwitch"></div><span>Invoice address same as delivery address</span></div></div>
+<div id="billFields"><label>Address <em>*</em></label><input id="billAddr" placeholder="Street name and number"><div class="row2"><div><label>Postcode <em>*</em></label><input id="billPost" placeholder="000 00"></div><div><label>City / Location <em>*</em></label><input id="billCity" placeholder="City"></div></div></div>
+</div>
+<div class="card"><h3>Additional Notes</h3><label style="display:none">Notes</label><textarea placeholder="Add any requests, delivery instructions, or additional information..."></textarea></div>
+</form>
+</div>
+<div>
+<div class="summary"><h3>Order Summary</h3>
+<div class="sitem"><div class="sicon">🏺</div><div><b>OBD-II Diagnostic Scanner</b><small>1 × 1 249 SEK</small></div></div>
+<div class="sitem"><div class="sicon">🏺</div><div><b>Reflective Decals</b><small>10 × 149 SEK</small></div></div>
+<div class="srow" style="margin-top:8px"><span>Product Count</span><b>3 Items</b></div>
+<div class="srow"><span>Subtotal</span><b>2 739 SEK</b></div>
+<div class="srow"><span>Shipping</span><b>49 SEK</b></div>
+<div class="srow"><span>Tax (25% VAT)</span><b>548 SEK</b></div>
+<div class="stotal"><span style="font-size:13px;font-weight:700">Total Price</span><strong>3 336 SEK</strong></div><div class="incl">Inc. VAT</div>
+</div>
+<div class="trust"><div class="titem"><div class="ticon">🚚</div><div><b>Fast Delivery</b><small>Standard logistics</small></div></div><div class="titem"><div class="ticon">🛡</div><div><b>Secure Payment</b><small>Encrypted checkout</small></div></div><div class="titem"><div class="ticon">✔</div><div><b>Guaranteed</b><small>Full satisfaction</small></div></div><div class="titem"><div class="ticon">🎧</div><div><b>24/7 Support</b><small>Expert assistance</small></div></div></div>
+</div>
+</div>
+
+<div class="bottom"><button class="back" onclick="location.href='cart.html'">← Go Back to Cart</button><button class="complete" id="completeBtn">Complete Order</button></div>
+
+<div class="popup-overlay" id="popupOverlay"><div class="popup"><div class="popup-icon error" id="popupIcon">!</div><h4 id="popupTitle">Missing details</h4><p id="popupMsg">Please fill all required fields.</p><button id="popupBtn">Got it</button><div class="bar" id="popupBar" style="display:none"><i></i></div></div></div>
+
+<footer><div class="foot-inner"><img src="opus-wh 1.png" alt="OPUS" style="height:50px;display:block;margin-bottom:52px"><p>Portal for ordering printed materials created by<br><a href="#">Tryckeriett</a></p></div></footer>
+
+<script>
+document.getElementById('cartCount').textContent=localStorage.getItem('opus_cart')||'1';
+const sw=document.getElementById('sameSwitch'), bf=document.getElementById('billFields');
+sw.onclick=()=>{sw.classList.toggle('on'); const on=sw.classList.contains('on'); bf.style.display=on?'none':''; };
+const overlay=document.getElementById('popupOverlay'), pIcon=document.getElementById('popupIcon'), pTitle=document.getElementById('popupTitle'), pMsg=document.getElementById('popupMsg'), pBtn=document.getElementById('popupBtn'), pBar=document.getElementById('popupBar');
+function showPopup(type,title,msg,autoRedirect){
+  pIcon.className='popup-icon '+type;
+  pIcon.textContent= type==='success' ? '✓' : '!';
+  pTitle.textContent=title; pMsg.textContent=msg;
+  pBtn.style.display= autoRedirect ? 'none' : '';
+  pBar.style.display= autoRedirect ? '' : 'none';
+  overlay.classList.add('show');
+  if(autoRedirect){
+    requestAnimationFrame(()=>{ pBar.querySelector('i').style.width='0'; setTimeout(()=>pBar.querySelector('i').style.width='100%',50); });
+    setTimeout(()=>{ location.href='order-complete.html'; },1700);
+  }
+}
+document.getElementById('popupBtn').onclick=()=>overlay.classList.remove('show');
+overlay.addEventListener('click',e=>{ if(e.target===overlay) overlay.classList.remove('show'); });
+document.getElementById('completeBtn').onclick=()=>{
+  const form=document.getElementById('checkoutForm');
+  let ok=true; let firstErr=null;
+  const billHidden = bf.style.display==='none';
+  form.querySelectorAll('input[required]').forEach(inp=>{
+    if(billHidden && bf.contains(inp)) return;
+    if(!inp.value.trim()){inp.classList.add('err'); ok=false; if(!firstErr) firstErr=inp;} else inp.classList.remove('err');
+  });
+  const em=document.getElementById('email');
+  if(em.value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em.value)){em.classList.add('err'); ok=false; if(!firstErr) firstErr=em;}
+  if(!ok){ showPopup('error','Missing details','Please fill all required fields marked with * with a valid email.'); if(firstErr) firstErr.focus(); return;}
+  const name=document.getElementById('fullname').value||'Karin Andersson';
+  localStorage.setItem('opus_customer', name);
+  showPopup('success','Order placed!','Thank you '+name+'. Your order is being processed...',true);
+};
+</script>
+</body>
+</html>
